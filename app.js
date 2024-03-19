@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var mongoose = require('mongoose');
 var app = express();
 
 // view engine setup
@@ -18,7 +18,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', require('./routes/index'));
 
-
+mongoose.connect('mongodb://localhost:27017/NodeJsS3').then(
+  function(){
+    console.log("connected");
+  }
+).catch(
+  function(err){
+  }
+)
+mongoose.connection.on('disconnected',function(){
+})
+mongoose.connection.on('disconnecting',function(){
+})
+mongoose.connection.on('reconnected',function(){
+})
+mongoose.connection.on('open',function(){
+})
+mongoose.connection.on('closed',function(){
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

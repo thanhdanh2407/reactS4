@@ -4,5 +4,5 @@ var router = express.Router();
 /* GET home page. */
 router.use('/books',require('./books'));
 router.use('/users',require('./users'));
-
+router.use('/students',require('./students'));
 module.exports = router;

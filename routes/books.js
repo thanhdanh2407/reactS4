@@ -15,13 +15,18 @@ router.get('/', async function (req, res, next) {
       if (stringArray.includes(key)) {
         queries[key] = new RegExp(value.replace(',', "|"), 'i');
       }
-      if(numberArray.includes(key)){
+      if (numberArray.includes(key)) {
         console.log();
-        var rex = new RegExp('lte|gte|lt|gt','i');
+        var rex = new RegExp('lte"|gte"|lt"|gt"', 'i');
         var string = JSON.stringify(req.query[key]);
         let index = string.search(rex);
-        var newvalue = string.slice(0,index)+'$'+string.slice(index);
-        queries[key] = JSON.parse(newvalue);
+        if (index > -1) {
+          var newvalue = string.slice(0, index) + '$' + string.slice(index);
+          queries[key] = JSON.parse(newvalue);
+        }else{
+          queries[key]= value
+        }
+        
       }
 
     }

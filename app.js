@@ -18,31 +18,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', require('./routes/index'));
 
-mongoose.connect('mongodb://localhost:27017/NodeJsS3').then(
-  function(){
-    console.log("connected");
-  }
-).catch(
-  function(err){
-  }
-)
-mongoose.connection.on('disconnected',function(){
-})
-mongoose.connection.on('disconnecting',function(){
-})
-mongoose.connection.on('reconnected',function(){
-})
-mongoose.connection.on('open',function(){
-})
-mongoose.connection.on('closed',function(){
+
+mongoose.connect('mongodb://localhost:27017/NodeJsS3').then(function () {
+  console.log("conneted");
 })
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -50,7 +36,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.send({
-    success:false,
+    success: false,
     message: err.message
   });
 });

@@ -44,7 +44,7 @@ router.get('/', async function (req, res, next) {
     }
   }
   let books = await bookModel.find(
-    queries)
+    queries).populate({path:'author',select:"name"}).lean()
     .limit(limit)
     .skip((page - 1) * limit)
     .sort(sortQuery)

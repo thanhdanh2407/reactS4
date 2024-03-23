@@ -7,7 +7,10 @@ var bookSchema = new mongoose.Schema({
         unique: true
     },
     year: Number,
-    author: String,
+    author: {
+        type: mongoose.Types.ObjectId,
+        ref: 'author'
+    },
     isDeleted: {
         type: Boolean,
         default: false

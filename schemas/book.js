@@ -1,19 +1,22 @@
 var mongoose = require("mongoose");
 
-var bookSchema = new mongoose.Schema({
+var bookSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     year: Number,
     author: {
-        type: mongoose.Types.ObjectId,
-        ref: 'author'
+      type: mongoose.Types.ObjectId,
+      ref: "author",
     },
     isDeleted: {
-        type: Boolean,
-        default: false
-    }
-}, { timestamps: true })
-module.exports = new mongoose.model('book', bookSchema);
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+module.exports = new mongoose.model("book", bookSchema);

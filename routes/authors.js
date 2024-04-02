@@ -1,12 +1,11 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var authorModel = require('../schemas/author')
-var ResHelper = require('../helper/ResponseHelper');
+var authorModel = require("../schemas/author");
+var ResHelper = require("../helper/ResponseHelper");
 
-router.get('/', async function (req, res, next) {
-  let authors = await authorModel.find({}).populate('published')
-    .exec();
-  ResHelper.RenderRes(res, true, authors)
+router.get("/", async function (req, res, next) {
+  let authors = await authorModel.find({}).populate("published").exec();
+  ResHelper.RenderRes(res, true, authors);
 });
 
 // router.get('/:id', async function (req, res, next) {
@@ -18,15 +17,15 @@ router.get('/', async function (req, res, next) {
 //   }
 // });
 
-router.post('/', async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   try {
     var newAuthor = new authorModel({
-      name: req.body.name
-    })
+      name: req.body.name,
+    });
     await newAuthor.save();
-    ResHelper.RenderRes(res, true, newAuthor)
+    ResHelper.RenderRes(res, true, newAuthor);
   } catch (error) {
-    ResHelper.RenderRes(res, false, error)
+    ResHelper.RenderRes(res, false, error);
   }
 });
 // router.put('/:id', async function (req, res, next) {
@@ -40,7 +39,6 @@ router.post('/', async function (req, res, next) {
 //     ResHelper.RenderRes(res, false, error)
 //   }
 // });
-
 
 // router.delete('/:id', async function (req, res, next) {
 //   try {
